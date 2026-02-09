@@ -1,17 +1,31 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
-const app = express()
-app.use(cors())
-app.use(express.json())
+const app = express();
 
+app.use(cors());
+app.use(express.json());
+
+// ✅ MongoDB Atlas connection (NO env needed)
 mongoose.connect(
-  "mongodb+srv://ruthwiksss111_db_user:1Ubc9hywccCzewk8@cluster0.ibdt1pj.mongodb.net/"
-).then(() => console.log("MongoDB Connected"))
+  "mongodb+srv://ruthwiksss111_db_user:1Ubc9hywccCzewk8@cluster0.ibdt1pj.mongodb.net/module4",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+)
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.error(err));
 
-app.use('/products', require('./src/routes/product.routes'))
-app.use('/orders', require('./src/routes/order.routes'))
-app.use('/payments', require('./src/routes/payment.routes'))
+// ✅ Routes
+app.use('/products', require('./src/routes/product.routes'));
+app.use('/orders', require('./src/routes/order.routes'));
+app.use('/payments', require('./src/routes/payment.routes'));
 
-app.listen(5000, () => console.log("Server running on 5000"))
+// ✅ IMPORTANT FOR RENDER
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
+});
