@@ -9,14 +9,11 @@ app.use(express.json());
 
 // ✅ MongoDB Atlas connection (NO env needed)
 mongoose.connect(
-  "mongodb+srv://ruthwiksss111_db_user:1Ubc9hywccCzewk8@cluster0.ibdt1pj.mongodb.net/module4",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
+  "mongodb+srv://ruthwiksss111_db_user:1Ubc9hywccCzewk8@cluster0.ibdt1pj.mongodb.net/module4"
 )
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.error(err));
+
 
 // ✅ Routes
 app.use('/products', require('./src/routes/product.routes'));

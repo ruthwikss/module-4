@@ -1,14 +1,8 @@
-const router = require('express').Router()
-const Product = require('../models/Product')
+const express = require('express');
+const router = express.Router();
 
-router.get('/', async (req, res) => {
-  const { cursor, q } = req.query
+router.get('/', (req, res) => {
+  res.json([]);
+});
 
-  const filter = q ? { $text: { $search: q } } : {}
-  if (cursor) filter._id = { $gt: cursor }
-
-  const products = await Product.find(filter).limit(5)
-  res.json(products)
-})
-
-module.exports = router
+module.exports = router;
